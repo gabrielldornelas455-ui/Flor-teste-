@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Você 🌸</title>
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(#fdeef4, #f8bbd0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+#flower {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    animation: surgir 1.5s ease;
+}
+
+@keyframes surgir {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.petala {
+    position: absolute;
+    width: 90px;
+    height: 140px;
+    background: radial-gradient(circle, #ffb6c1, #ff69b4);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.petala:active {
+    transform: scale(0.85) rotate(10deg);
+}
+
+#centro {
+    position: absolute;
+    top: 85px;
+    left: 85px;
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle, gold, orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    animation: pulsar 1.5s infinite;
+}
+
+@keyframes pulsar {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+#mensagem {
+    margin-top: 25px;
+    font-size: 22px;
+    color: #c2185b;
+    text-align: center;
+    display: none;
+    animation: aparecer 2s ease;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="musica" autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2023/03/30/audio_9f9f6c73d4.mp3" type="audio/mpeg">
+</audio>
+
+<div id="flower">
+    <div class="petala" style="top:0; left:85px; transform: rotate(0deg);" onclick="remover(this)"></div>
+    <div class="petala" style="top:25px; left:145px; transform: rotate(45deg);" onclick="remover(this)"></div>
+    <div class="petala" style="top:85px; left:170px; transform: rotate(90deg);" onclick="remover(this)"></div>
+    <div class="petala" style="top:145px; left:145px; transform: rotate(135deg);" onclick="remover(this)"></div>
+    <div class="petala" style="top:170px; left:85px; transform: rotate(180deg);" onclick="remover(this)"></div>
+    <div class="petala" style="top:145px; left:25px; transform: rotate(225deg);" onclick="remover(this)"></div>
+    <div class="petala" style="top:85px; left:0px; transform: rotate(270deg);" onclick="remover(this)"></div>
+    <div class="petala" style="top:25px; left:25px; transform: rotate(315deg);" onclick="remover(this)"></div>
+
+    <div id="centro">🌸</div>
+</div>
+
+<div id="mensagem">eu te amo parceirinha 💖</div>
+
+<script>
+function remover(petala) {
+    petala.style.opacity = "0";
+    petala.style.transform += " scale(0.7)";
+    petala.style.pointerEvents = "none";
+
+    setTimeout(() => {
+        petala.remove();
+        if (document.querySelectorAll(".petala").length === 0) {
+            document.getElementById("mensagem").style.display = "block";
+        }
+    }, 400);
+}
+
+// Garante música no celular após toque
+document.body.addEventListener("click", () => {
+    document.getElementById("musica").play();
+}, { once: true });
+</script>
+
+</body>
+</html>
