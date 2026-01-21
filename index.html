@@ -3,122 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Você 🌸</title>
+<title>Para Você</title>
 
 <style>
 body {
     margin: 0;
-    background: linear-gradient(#fdeef4, #f8bbd0);
+    height: 100vh;
+    background: linear-gradient(to top, #f3d6df, #f9eef2);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
+    font-family: "Georgia", serif;
     overflow: hidden;
+}
+
+#container {
+    text-align: center;
+}
+
+#stem {
+    width: 6px;
+    height: 0;
+    background: linear-gradient(to top, #2e7d32, #66bb6a);
+    margin: 0 auto;
+    animation: growStem 2.5s ease forwards;
+}
+
+@keyframes growStem {
+    to { height: 150px; }
+}
+
+#bud {
+    width: 40px;
+    height: 40px;
+    background: #d86b8c;
+    border-radius: 50%;
+    margin: -20px auto 0;
+    animation: openBud 2s ease forwards;
+    animation-delay: 2.5s;
+}
+
+@keyframes openBud {
+    to { transform: scale(0); opacity: 0; }
 }
 
 #flower {
     position: relative;
-    width: 260px;
-    height: 260px;
-    animation: surgir 1.5s ease;
+    width: 300px;
+    height: 300px;
+    margin: -30px auto 0;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: bloom 2s ease forwards;
+    animation-delay: 4.5s;
 }
 
-@keyframes surgir {
-    from { transform: scale(0); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+@keyframes bloom {
+    to { opacity: 1; transform: scale(1); }
 }
 
 .petala {
     position: absolute;
     width: 90px;
-    height: 140px;
-    background: radial-gradient(circle, #ffb6c1, #ff69b4);
-    border-radius: 50%;
+    height: 170px;
+    background: linear-gradient(to bottom, #ffc1d1, #e75480);
+    border-radius: 50% 50% 60% 60%;
+    transform-origin: bottom center;
+    box-shadow: inset 0 -12px 18px rgba(0,0,0,0.15);
     cursor: pointer;
-    transition: transform 0.4s ease, opacity 0.4s ease;
+    transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
-.petala:active {
-    transform: scale(0.85) rotate(10deg);
+.petala:hover {
+    transform: scale(1.04);
+}
+
+.cair {
+    animation: fall 3s ease forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translate(60px, 500px) rotate(120deg);
+        opacity: 0;
+    }
 }
 
 #centro {
     position: absolute;
-    top: 85px;
-    left: 85px;
-    width: 90px;
-    height: 90px;
-    background: radial-gradient(circle, gold, orange);
+    top: 115px;
+    left: 115px;
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, #f6d365, #cfa014);
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    animation: pulsar 1.5s infinite;
-}
-
-@keyframes pulsar {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    box-shadow: inset 0 0 12px rgba(0,0,0,0.25);
 }
 
 #mensagem {
     margin-top: 25px;
-    font-size: 22px;
-    color: #c2185b;
-    text-align: center;
-    display: none;
-    animation: aparecer 2s ease;
-}
-
-@keyframes aparecer {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    font-size: 26px;
+    color: #7a1f3d;
+    min-height: 32px;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="musica" autoplay loop>
-    <source src="https://cdn.pixabay.com/audio/2023/03/30/audio_9f9f6c73d4.mp3" type="audio/mpeg">
-</audio>
+<!-- Sons -->
+<audio id="s1" src="https://cdn.pixabay.com/audio/2022/03/15/audio_9c7f4e7c12.mp3"></audio>
+<audio id="s2" src="https://cdn.pixabay.com/audio/2022/03/15/audio_6c9fa3c9b4.mp3"></audio>
+<audio id="s3" src="https://cdn.pixabay.com/audio/2022/03/15/audio_0b5f5c57df.mp3"></audio>
+<audio id="s4" src="https://cdn.pixabay.com/audio/2022/03/15/audio_fbe9a4fba1.mp3"></audio>
+<audio id="s5" src="https://cdn.pixabay.com/audio/2022/03/15/audio_d0c7c6fa1b.mp3"></audio>
+<audio id="s6" src="https://cdn.pixabay.com/audio/2022/03/15/audio_8c7b2a6c2a.mp3"></audio>
+<audio id="s7" src="https://cdn.pixabay.com/audio/2022/03/15/audio_5f3c9c45ae.mp3"></audio>
+<audio id="s8" src="https://cdn.pixabay.com/audio/2022/03/15/audio_7a8c2a1b0c.mp3"></audio>
 
-<div id="flower">
-    <div class="petala" style="top:0; left:85px; transform: rotate(0deg);" onclick="remover(this)"></div>
-    <div class="petala" style="top:25px; left:145px; transform: rotate(45deg);" onclick="remover(this)"></div>
-    <div class="petala" style="top:85px; left:170px; transform: rotate(90deg);" onclick="remover(this)"></div>
-    <div class="petala" style="top:145px; left:145px; transform: rotate(135deg);" onclick="remover(this)"></div>
-    <div class="petala" style="top:170px; left:85px; transform: rotate(180deg);" onclick="remover(this)"></div>
-    <div class="petala" style="top:145px; left:25px; transform: rotate(225deg);" onclick="remover(this)"></div>
-    <div class="petala" style="top:85px; left:0px; transform: rotate(270deg);" onclick="remover(this)"></div>
-    <div class="petala" style="top:25px; left:25px; transform: rotate(315deg);" onclick="remover(this)"></div>
+<div id="container">
+    <div id="stem"></div>
+    <div id="bud"></div>
 
-    <div id="centro">🌸</div>
+    <div id="flower">
+        <div class="petala" style="top:0; left:105px; transform:rotate(0deg)" onclick="petala(this,'s1')"></div>
+        <div class="petala" style="top:30px; left:165px; transform:rotate(45deg)" onclick="petala(this,'s2')"></div>
+        <div class="petala" style="top:105px; left:195px; transform:rotate(90deg)" onclick="petala(this,'s3')"></div>
+        <div class="petala" style="top:175px; left:165px; transform:rotate(135deg)" onclick="petala(this,'s4')"></div>
+        <div class="petala" style="top:200px; left:105px; transform:rotate(180deg)" onclick="petala(this,'s5')"></div>
+        <div class="petala" style="top:175px; left:45px; transform:rotate(225deg)" onclick="petala(this,'s6')"></div>
+        <div class="petala" style="top:105px; left:15px; transform:rotate(270deg)" onclick="petala(this,'s7')"></div>
+        <div class="petala" style="top:30px; left:45px; transform:rotate(315deg)" onclick="petala(this,'s8')"></div>
+
+        <div id="centro"></div>
+    </div>
+
+    <div id="mensagem"></div>
 </div>
 
-<div id="mensagem">eu te amo parceirinha 💖</div>
-
 <script>
-function remover(petala) {
-    petala.style.opacity = "0";
-    petala.style.transform += " scale(0.7)";
-    petala.style.pointerEvents = "none";
+let texto = "eu te amo parceirinha";
+let pos = 0;
+
+function petala(p, som) {
+    document.getElementById(som).play();
+    p.classList.add("cair");
+    p.style.pointerEvents = "none";
 
     setTimeout(() => {
-        petala.remove();
+        p.remove();
         if (document.querySelectorAll(".petala").length === 0) {
-            document.getElementById("mensagem").style.display = "block";
+            escrever();
         }
-    }, 400);
+    }, 3000);
 }
 
-// Garante música no celular após toque
+function escrever() {
+    if (pos < texto.length) {
+        document.getElementById("mensagem").innerHTML += texto[pos];
+        pos++;
+        setTimeout(escrever, 120);
+    }
+}
+
+// desbloqueio de áudio no celular
 document.body.addEventListener("click", () => {
-    document.getElementById("musica").play();
+    document.querySelectorAll("audio").forEach(a => {
+        a.play().then(() => a.pause());
+    });
 }, { once: true });
 </script>
 
